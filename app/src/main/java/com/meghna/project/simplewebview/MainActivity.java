@@ -129,6 +129,14 @@ public class MainActivity extends AppCompatActivity {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // Set up connection parameters, such as request method, headers, etc.
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
+            //connection.setRequestProperty("Authorization", "Bearer your_access_token");
+
+            // Set other connection properties
+            connection.setConnectTimeout(5000); // Timeout in milliseconds
+            connection.setReadTimeout(5000); // Timeout in milliseconds
+
 
             // Check if the response code is HTTP_OK before reading the content
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -141,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             connection.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         byte[] bytes = new byte[0];
         return bytes;
